@@ -1,0 +1,36 @@
+{
+  "name": "my-nodejs-app",
+  "version": "1.0.0",
+  "description": "Node.js application deployed with AWS CodePipeline",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest --passWithNoTests",
+    "build": "echo 'Building...'",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "aws",
+    "codepipeline"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "jest": "^29.7.0",
+    "eslint": "^8.50.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
