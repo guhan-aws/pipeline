@@ -7,6 +7,7 @@
 #IGW is routed to the public subnets.
 #NAT is routed to the private subnets.
 #DB subnets are associated to the private subnets.
+#test
 AWSTemplateFormatVersion: '2010-09-09'
 Description: NETWORK STACK with 2 - Pub/Private Subnets and 2 - DB Subnets in 2 AZs with NAT & IGW and all Routs.
 Parameters:
