@@ -1,0 +1,37 @@
+version: 0.2
+
+env:
+  variables:
+    DOCKERHUB_REPO: "gugannk/pipeline"   # 🧠 replace with your Docker Hub repo (e.g. username/repo)
+    DOCKERHUB_USER: "gugannk"             # 🧠 replace with your Docker Hub username
+  secrets-manager:
+    DOCKERHUB_PASS: "dockerhub/gugannk" # 🧠 or use AWS Secrets Manager secret name & key
+  privileged: true                       # ✅ required for Docker in CodeBuild
+
+phases:
+  pre_build:
+    commands:
+      - echo "Logging in to Docker Hub..."
+      - echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:-latest}
+      - echo "Building image tag: $IMAGE_TAG"
+
+  build:
+    commands:
+      - echo "Building Docker image..."
+      - docker build -t ${DOCKERHUB_REPO}:${IMAGE_TAG} .
+      - docker images
+
+  post_build:
+    commands:
+      - echo "Pushing Docker image to Docker Hub..."
+      - docker push ${DOCKERHUB_REPO}:${IMAGE_TAG}
+      - echo "Docker image pushed successfully!"
+      - echo "Creating imagedefinitions.json (optional for ECS)..."
+      - printf '[{"name":"web","imageUri":"%s"}]' ${DOCKERHUB_REPO}:${IMAGE_TAG} > imagedefinitions.json
+      - cat imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
