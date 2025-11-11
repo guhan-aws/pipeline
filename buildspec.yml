@@ -5,7 +5,7 @@ env:
     DOCKERHUB_REPO: "gugannk/pipeline"   # 🧠 replace with your Docker Hub repo (e.g. username/repo)
     DOCKERHUB_USER: "gugannk"             # 🧠 replace with your Docker Hub username
   secrets-manager:
-    DOCKERHUB_PASS: "dockerhub/gugannk" # 🧠 or use AWS Secrets Manager secret name & key
+    DOCKERHUB_PASS: "dockerhub/gugannk:password" # 🧠 or use AWS Secrets Manager secret name & key
   privileged: true                       # ✅ required for Docker in CodeBuild
 
 phases:
