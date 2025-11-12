@@ -34,3 +34,7 @@ phases:
 artifacts:
   files:
     - imagedefinitions.json
+cache:
+  paths:
+    - '/root/.npm/**/*'
+    - 'node_modules/**/*'
