@@ -33,7 +33,11 @@ phases:
 
 artifacts:
   files:
+    - appspec.yml
+    - index.html
+    - Dockerfile
     - imagedefinitions.json
+    - scripts/**/*
 cache:
   paths:
     - '/root/.npm/**/*'
