@@ -14,7 +14,7 @@ phases:
       - echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:-latest}
-      - echo "Building image tag: $IMAGE_TAG"
+      - echo "Building image"
 
   build:
     commands:
